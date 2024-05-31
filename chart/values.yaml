@@ -263,7 +263,7 @@ rbac:
 
 # Airflow executor
 # One of: LocalExecutor, LocalKubernetesExecutor, CeleryExecutor, KubernetesExecutor, CeleryKubernetesExecutor
-executor: "CeleryExecutor"
+executor: "LocalExecutor"
 
 # If this is true and using LocalExecutor/KubernetesExecutor/CeleryKubernetesExecutor, the scheduler's
 # service account will have access to communicate with the api-server and launch pods.
@@ -792,7 +792,7 @@ workers:
 
 # Airflow scheduler settings
 scheduler:
-  enabled: true
+  enabled: false
   #  hostAliases for the scheduler pod
   hostAliases: []
   #  - ip: "127.0.0.1"
@@ -805,7 +805,7 @@ scheduler:
   # If the scheduler stops heartbeating for 5 minutes (5*60s) kill the
   # scheduler and let Kubernetes restart it
   livenessProbe:
-    initialDelaySeconds: 10
+    initialDelaySeconds: 30
     timeoutSeconds: 20
     failureThreshold: 5
     periodSeconds: 60
@@ -1371,7 +1371,7 @@ webserver:
 
 # Airflow Triggerer Config
 triggerer:
-  enabled: true
+  enabled: false
   # Number of airflow triggerers in the deployment
   replicas: 1
   # Max number of old replicasets to retain
@@ -2125,7 +2125,7 @@ pgbouncer:
 
 # Configuration for the redis provisioned by the chart
 redis:
-  enabled: true
+  enabled: false
   terminationGracePeriodSeconds: 600
 
   # Create ServiceAccount
